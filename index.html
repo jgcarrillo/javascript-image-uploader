@@ -6,15 +6,25 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Javascript Image uploader</title>
 
+		<!-- GOOGLE FONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+
 		<link rel="stylesheet" href="./css/style.css" />
 
 		<script defer src="./js/app.js"></script>
 	</head>
 	<body>
-		<input type="file" multiple="false" accept="image/*" name="file" id="file-input" />
+		<header class="header">
+			<h1>Choose your photos and add a custom backgroud</h1>
+		</header>
+		<main class="main">
+			<input type="file" multiple="false" accept="image/*" name="file" id="input" class="btn btn-input" />
 
-		<canvas class="display-image"></canvas>
+			<canvas class="canvas"></canvas>
 
-		<a href="" class="image-link is-disabled" disabled>Download image</a>
+			<a href="" class="link link--disabled" disabled>Download image</a>
+		</main>
 	</body>
 </html>
