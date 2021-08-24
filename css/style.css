@@ -11,7 +11,7 @@ body {
 .display-image {
 	width: 1000px;
 	height: 500px;
-	border: 1px solid black;
+	border: 2px dashed black;
 	background-size: cover;
 	z-index: -1;
 }

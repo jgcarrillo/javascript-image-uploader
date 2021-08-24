@@ -44,7 +44,6 @@ const getImg = async (url, imgElem) => {
 	const res = await fetch(url);
 	const b = await res.blob();
 	const imageUrl = URL.createObjectURL(b);
-	console.log(imageUrl);
 
 	imgElem.addEventListener('load', () => {
 		URL.revokeObjectURL(imageUrl);
@@ -62,19 +61,30 @@ imageInput.addEventListener('change', (e) => {
 	// getImg(url, imageElem);
 
 	imageElem.addEventListener('load', () => {
-		ctx.drawImage(imageElem, displayImg.width / 2 - imageElem.width / 2, displayImg.height / 2 - imageElem.height / 2);
+		ctx.drawImage(
+			imageElem,
+			0,
+			0,
+			imageElem.width,
+			imageElem.height,
+			// displayImg.width / 2 - imageElem.width / 2,
+			// displayImg.height / 2 - imageElem.height / 2,
+			0,
+			0,
+			400,
+			300
+		);
 
 		const link = document.createElement('a');
 		link.download = 'canvas';
 		link.href = displayImg.toDataURL();
-		console.log(link);
 		link.click();
 	});
 
-	displayImg.width = 1000;
-	displayImg.height = 1000;
-	// ctx.fillStyle = 'red';
-	// ctx.fillRect(0, 0, displayImg.width, displayImg.height);
+	displayImg.width = 1500;
+	displayImg.height = 900;
+	ctx.fillStyle = 'red';
+	ctx.fillRect(0, 0, displayImg.width, displayImg.height);
 
 	// CREATE PREVIEW IMAGE
 	// displayImage(file);
