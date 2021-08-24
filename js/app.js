@@ -10,7 +10,7 @@ const downloadImage = async (imgSrc, { name }) => {
 
 	imgLink.classList.remove('is-disabled');
 	imgLink.href = imageURL;
-	imgLink.download = name || 'download';
+	imgLink.download = 'downloadedImage';
 };
 
 const createImage = (file) => {
@@ -18,7 +18,7 @@ const createImage = (file) => {
 
 	reader.addEventListener('load', () => {
 		uploadedImage = reader.result;
-		displayImg.style.opacity = '0.5';
+
 		displayImg.style.backgroundImage = `url(${uploadedImage})`;
 	});
 
@@ -29,7 +29,9 @@ imageInput.addEventListener('change', function () {
 	const file = this.files[0];
 	const url = URL.createObjectURL(file);
 
+	// CREATE PREVIEW IMAGE
 	createImage(file);
 
+	// DOWNLOAD THE PREVIOUS UPLOADED IMAGE
 	downloadImage(url, file);
 });
