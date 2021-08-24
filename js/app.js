@@ -65,11 +65,19 @@ input.addEventListener('change', (e) => {
 	const url = URL.createObjectURL(file);
 	const ctx = canvas.getContext('2d');
 
-	imageElem = createImageElement(url);
+	const imageElem = createImageElement(url);
 
 	canvas.width = 1500;
 	canvas.height = 900;
-	ctx.fillStyle = 'red';
+	// ctx.fillStyle = 'rgb(34,193,195);
+
+	// GRADIENTS
+	// https://briangrinstead.com/gradient/
+	let gradient = ctx.createLinearGradient(0, 0, 0, 300);
+	gradient.addColorStop(0, 'rgb(95, 119, 237)');
+	gradient.addColorStop(1, 'rgb(203, 224, 104)');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 300, 300);
 
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	imageElem.addEventListener('load', () => {
@@ -81,11 +89,19 @@ input.addEventListener('change', (e) => {
 			imageElem.height,
 			// canvas.width / 2 - imageElem.width / 2,
 			// canvas.height / 2 - imageElem.height / 2,
-			0,
-			0,
-			400,
-			300
+			100,
+			100,
+			800,
+			500
 		);
+
+		ctx.shadowColor = 'black';
+		ctx.shadowBlur = 15;
+
+		ctx.strokeStyle = 'white';
+		ctx.lineJoin = 'round';
+		ctx.lineWidth = 6;
+		ctx.strokeRect(100, 100, 800, 500);
 
 		link.download = 'canvas';
 		link.classList.remove('link--disabled');
