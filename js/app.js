@@ -17,12 +17,26 @@ const createImage = (file) => {
 	const reader = new FileReader();
 
 	reader.addEventListener('load', () => {
+		localStorage.setItem('uploaded-image', reader.result);
+
 		uploadedImage = reader.result;
 
-		displayImg.style.backgroundImage = `url(${uploadedImage})`;
+		// displayImg.style.backgroundImage = `url(${uploadedImage})`;
+
+		getLocalStorageImage();
 	});
 
 	reader.readAsDataURL(file);
+};
+
+const getLocalStorageImage = () => {
+	const getImage = localStorage.getItem('uploaded-image');
+
+	if (getImage) {
+		displayImg.style.backgroundImage = `url(${getImage})`;
+	} else {
+		displayImg.style.backgroundColor = '';
+	}
 };
 
 imageInput.addEventListener('change', function () {
@@ -34,4 +48,10 @@ imageInput.addEventListener('change', function () {
 
 	// DOWNLOAD THE PREVIOUS UPLOADED IMAGE
 	downloadImage(url, file);
+
+	getLocalStorageImage();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+	getLocalStorageImage();
 });
