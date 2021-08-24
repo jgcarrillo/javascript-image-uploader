@@ -9,10 +9,15 @@ body {
 }
 
 .display-image {
-	width: 400px;
-	height: 300px;
+	width: 1000px;
+	height: 500px;
 	border: 1px solid black;
 	background-size: cover;
+	z-index: -1;
+}
+
+.canvas__img {
+	z-index: 1;
 }
 
 .is-disabled {
