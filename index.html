@@ -11,10 +11,10 @@
 		<script defer src="./js/app.js"></script>
 	</head>
 	<body>
-		<input type="file" name="file" id="file-input" />
+		<input type="file" multiple="false" accept="image/*" name="file" id="file-input" />
 
-		<div class="display-image"></div>
+		<canvas class="display-image"></canvas>
 
-		<a href="" class="image-link">Download image</a>
+		<a href="" class="image-link is-disabled" disabled>Download image</a>
 	</body>
 </html>
