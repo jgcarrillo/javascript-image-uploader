@@ -76,7 +76,7 @@ body {
 
 @media only screen and (max-width: 1000px) {
 	.header__title {
-		font-size: 14px;
+		font-size: 30px;
 	}
 	.canvas {
 		width: 50rem;
