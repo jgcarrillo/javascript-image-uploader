@@ -1,7 +1,6 @@
 const input = document.querySelector('.btn-input');
 const canvas = document.querySelector('.canvas');
 const link = document.querySelector('.link');
-let uploadedImage = '';
 
 /*
 const downloadImage = async (imgSrc, { name }) => {
@@ -60,6 +59,47 @@ const createImageElement = (imageURL) => {
 	return $image;
 };
 
+const setGradient = (ctx) => {
+	// https://briangrinstead.com/gradient/
+	const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+
+	gradient.addColorStop(0, 'rgb(95, 119, 237)');
+	gradient.addColorStop(1, 'rgb(203, 224, 104)');
+
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 300, 300);
+
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+};
+
+const setBlur = (ctx, colour, size) => {
+	ctx.shadowColor = colour;
+	ctx.shadowBlur = size;
+};
+
+const setStroke = (ctx) => {
+	ctx.strokeStyle = 'white';
+	ctx.lineJoin = 'round';
+	ctx.lineWidth = 6;
+	ctx.strokeRect(300, 200, 800, 500);
+};
+
+const drawImage = (ctx, image, canvas) => {
+	ctx.drawImage(
+		image,
+		0,
+		0,
+		image.width,
+		image.height,
+		// canvas.width / 2 - imageElem.width / 2,
+		// canvas.height / 2 - imageElem.height / 2,
+		300,
+		200,
+		800,
+		500
+	);
+};
+
 input.addEventListener('change', (e) => {
 	const file = e.target.files[0];
 	const url = URL.createObjectURL(file);
@@ -67,42 +107,36 @@ input.addEventListener('change', (e) => {
 
 	const imageElem = createImageElement(url);
 
+	/***********************
+	SET HERE THE CANVAS SIZE
+	***********************/
 	canvas.width = 1500;
 	canvas.height = 900;
-	// ctx.fillStyle = 'rgb(34,193,195);
 
-	// GRADIENTS
-	// https://briangrinstead.com/gradient/
-	let gradient = ctx.createLinearGradient(0, 0, 0, 300);
-	gradient.addColorStop(0, 'rgb(95, 119, 237)');
-	gradient.addColorStop(1, 'rgb(203, 224, 104)');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, 300, 300);
+	/******************
+	BACKGROUND GRADIENT
+	*******************/
+	setGradient(ctx);
 
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	imageElem.addEventListener('load', () => {
-		ctx.drawImage(
-			imageElem,
-			0,
-			0,
-			imageElem.width,
-			imageElem.height,
-			// canvas.width / 2 - imageElem.width / 2,
-			// canvas.height / 2 - imageElem.height / 2,
-			100,
-			100,
-			800,
-			500
-		);
+		/*******************
+		DRAW IMAGE ON CANVAS
+		*******************/
+		drawImage(ctx, imageElem, canvas);
 
-		ctx.shadowColor = 'black';
-		ctx.shadowBlur = 15;
+		/*********
+		IMAGE BLUR
+		**********/
+		setBlur(ctx, 'black', 15);
 
-		ctx.strokeStyle = 'white';
-		ctx.lineJoin = 'round';
-		ctx.lineWidth = 6;
-		ctx.strokeRect(100, 100, 800, 500);
+		/****************
+		IMAGE STROLE PATH
+		****************/
+		setStroke(ctx);
 
+		/*********************************
+		CREATE AND ENABLED DOWNLOAD BUTTON
+		*********************************/
 		link.download = 'canvas';
 		link.classList.remove('link--disabled');
 		link.href = canvas.toDataURL();
