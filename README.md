@@ -33,6 +33,14 @@ At the moment, you only are able to upload an image and download it again with a
 
 ### 🚀 Usage
 
+The app works by reading the content of the files array in the index 0. It's important to say that that file need to be converted into al URL throught the `URL.createObjectURL()` metod.
+
+The next step is create the image with that URL and paint it into the canvas when the image is loaded.
+
+Finally, the image is painted into the canvas thanks to the `drawImage()` method. [You can see here further information about this method](https://developer.mozilla.org/es/docs/Web/API/CanvasRenderingContext2D/drawImage).
+
+The rest of the code invoques different arrow functions that apply styles within the image canvas.
+
 ### 🚩 Issues
 
 During the development I found such a different issues related with works with canvas in JavaScript. Some are the following:
